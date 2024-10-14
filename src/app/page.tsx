@@ -17,8 +17,8 @@ export default function Home() {
   ]
   
   return (
-    <div className="min-h-screen w-[100vw] max-w-full m-0 p-0 overflow-x-hidden overflow-y-auto transition-all">
-      <div className="min-h-full w-full max-w-full flex justify-between items-start flex-nowrap bg-gradient-to-b from-[#A90202] to-[#430101]">
+    <div className="cinema-background min-h-screen w-[100vw] max-w-full m-0 p-0 overflow-x-hidden overflow-y-auto transition-all">
+      <div className="min-h-full w-full max-w-full flex justify-between items-start flex-nowrap from-[#A90202] to-[#430101]">
         
         <FilmStrip images={poster1} />
         
