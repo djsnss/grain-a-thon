@@ -14,10 +14,17 @@
   }
 }
 
+:root {
+  background: linear-gradient(180deg, #A90202 0%, #430101 100%);
+}
+
 body {
   color: var(--foreground);
-  background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.home-page {
+  background-image: url('/images/background.svg');
 }
 
 @layer utilities {
