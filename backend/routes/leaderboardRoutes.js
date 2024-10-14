@@ -1,34 +1,9 @@
-const express = require('express');
-const Donor = require('../models/donor');
+import express from "express";
+import { getDepartment, getIndividual } from "../controllers/leaderboardC.js";
 
 const router = express.Router();
 
-router.get('/department', async (req, res) => {
-  try {
-    const leaderboard = await Donor.aggregate([
-      {
-        $group: {
-          _id: "$department",
-          totalGrainCollected: { $sum: "$grainCollected" }
-        }
-      },
-      {
-        $sort: { totalGrainCollected: -1 }
-      }
-    ]);
-    res.send(leaderboard);
-  } catch (error) {
-    res.status(500).send(error);
-  }
-});
+router.get("/department", getDepartment);
+router.get("/individual", getIndividual);
 
-router.get('/individual', async (req, res) => {
-  try {
-    const leaderboard = await Donor.find({}).sort('-grainCollected').limit(10);
-    res.send(leaderboard);
-  } catch (error) {
-    res.status(500).send(error);
-  }
-});
-
-module.exports = router;
+export default router;

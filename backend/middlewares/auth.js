@@ -1,21 +1,25 @@
-const jwt = require('jsonwebtoken');
-const Admin = require('../models/admin');
+import { adminSessions } from "../controllers/adminC.js";
 
 const authenticateAdmin = async (req, res, next) => {
+  const token = req.header("Authorization").split(" ")[1];
+  console.log(token);
   try {
-    const token = req.header('Authorization').replace('Bearer ', '');
-    const decoded = jwt.verify(token, 'your_jwt_secret');
-    const admin = await Admin.findOne({ _id: decoded._id });
-    
-    if (!admin) {
-      throw new Error();
+    if (!token) {
+      return res
+        .status(401)
+        .json({ message: "Authorization token and username are required" });
     }
-    
-    req.admin = admin;
+    console.log(adminSessions);
+    if (!adminSessions[token]) {
+      return res
+        .status(403)
+        .json({ message: "Invalid token or session expired" });
+    }
     next();
-  } catch (error) {
-    res.status(401).send({ error: 'Please authenticate.' });
+  } catch (err) {
+    console.error("Authorization failed:", err);
+    res.status(400).send("Authorization failed");
   }
 };
 
-module.exports = authenticateAdmin;
+export default authenticateAdmin;
