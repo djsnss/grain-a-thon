@@ -1,0 +1,12 @@
+.volunteers-container {
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 15px;
+}
+
+.volunteer-info {
+  font-size: 26px;
+}
+
+.volunteer-info:hover {
+  font-size: 30px;
+}

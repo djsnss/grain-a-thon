@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Poppins';
+  src: url('../app/fonts/Poppins-Regular.ttf') format('truetype'); /* Path to the font file */
+  font-weight: normal; /* Normal weight */
+  font-style: normal; /* Normal style */
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../app/fonts/Poppins-Bold.ttf') format('truetype'); /* Path to the bold font file */
+  font-weight: bold; /* Bold weight */
+  font-style: normal; /* Normal style */
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../app/fonts/Poppins-Medium.ttf') format('truetype'); /* Path to the medium font file */
+  font-weight: 500; /* Medium weight */
+  font-style: normal; /* Normal style */
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
