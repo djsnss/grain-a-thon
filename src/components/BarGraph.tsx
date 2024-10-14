@@ -10,19 +10,18 @@ import {
   Legend,
 } from 'chart.js';
 
-// Register necessary chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const BarGraph = ({ data }) => {
-  // Prepare the chart data
+  
   const chartData = {
-    labels: data.map(item => item.label), // Labels for each bar (e.g., 'COMPS', 'IT', etc.)
+    labels: data.map(item => item.label), 
     datasets: [
       {
         label: 'Percentage',
-        data: data.map(item => item.value), // Values for each bar
-        backgroundColor: data.map(item => item.color), // Dynamic colors for bars
-        borderRadius: 10, // Rounded bars
+        data: data.map(item => item.value), 
+        backgroundColor: data.map(item => item.color), 
+        borderRadius: 10, 
       },
     ],
   };
@@ -31,38 +30,38 @@ const BarGraph = ({ data }) => {
   const options = {
     responsive: true,
     maintainAspectRatio: false,
-    indexAxis: 'y', // Make the bars horizontal
+    indexAxis: 'y', 
     scales: {
       x: {
         beginAtZero: true,
         ticks: {
-          callback: (value) => `${value}%`, // Display percentage on x-axis
+          callback: (value) => `${value}%`, 
         },
       },
       y: {
         beginAtZero: true,
         ticks: {
           font: {
-            size: 14, // Increase the font size of labels for better visibility
+            size: 14, 
           },
         },
       },
     },
     plugins: {
       legend: {
-        display: false, // Hide legend
+        display: false, 
       },
       tooltip: {
         callbacks: {
-          label: (tip) => `${tip.raw}%`, // Show percentage in tooltip
+          label: (tip) => `${tip.raw}%`, 
         },
       },
     },
   };
 
   return (
-    <div className="h-max w-[80%] max-w-full my-5 mx-2 bg-gray-100 p-6 rounded-lg shadow-md">
-      <div className="h-[350px]"> {/* Set a height for the chart */}
+    <div className="h-max w-[80%] max-w-full my-3 mx-2 bg-gray-100 p-6 rounded-lg shadow-md border-[16px] border-black">
+      <div className="h-[350px]"> 
         <Bar data={chartData} options={options} />
       </div>
     </div>

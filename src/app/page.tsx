@@ -2,6 +2,7 @@
 import React, { useState,useEffect } from 'react';
 import FilmStrip from "@/components/FilmStrip";
 import BarGraph from '@/components/BarGraph';
+import Navbar from '@/components/Navbar';
 
 
 export default function Home() {
@@ -40,13 +41,15 @@ export default function Home() {
   
   return (
     <div className="cinema-background min-h-screen w-[100vw] max-w-full m-0 p-0 overflow-x-hidden overflow-y-auto transition-all">
-      <div className="min-h-full w-full max-w-full flex justify-between items-start flex-nowrap from-[#A90202] to-[#430101]">
+      {/* <Navbar/> */}
+      
+      <div className="h-full w-full max-w-full flex justify-between items-start flex-nowrap from-[#A90202] to-[#430101]">
         
         <FilmStrip images={poster1} />
 
         <div className="h-max w-[70%] max-w-full flex justify-center items-center flex-col p-4">
           
-          <div className="h-max w-full max-w-full m-2 p-2 flex justify-between items-center flex-row flex-wrap">
+          <div className="h-max w-full max-w-full p-2 flex justify-between items-center flex-row flex-wrap">
             
             <div className='h-max w-max max-w-full m-1 flex justify-between items-center gap-4'>
               <img src="/images/Nss new logo-1.png" alt="NSS LOGO" className="h-16 rounded-3xl"/>
