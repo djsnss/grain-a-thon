@@ -21,7 +21,10 @@ const getDepartment = async (req, res) => {
 
 const getIndividual = async (req, res) => {
   try {
-    const leaderboard = await Donor.find({}).sort("-grainCollected").limit(10);
+    const { department } = req.body;
+    const leaderboard = await Donor.find({ department })
+      .sort("-grainCollected")
+      .limit(10);
     res.send(leaderboard);
   } catch (error) {
     res.status(500).send(error);
