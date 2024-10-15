@@ -71,7 +71,7 @@ export default function RootLayout({
       >
         <FloatingNavDemo />
         <div className="min-h-screen w-[100vw] max-w-full m-0 p-0 overflow-x-hidden overflow-y-auto transition-all">  
-          <div className="h-full w-full max-w-full flex flex-col lg:flex-row justify-between items-start flex-nowrap bg-gradient-to-b from-red-500 to-red-950">
+          <div className="h-full w-full max-w-full flex flex-col lg:flex-row justify-between items-start flex-nowrap bg-gradient-to-b from-red-500 to-red-950 cinema-background">
             <div className="w-full lg:w-[15%]">
               <FilmStrip images={poster1} />
             </div>
