@@ -28,4 +28,23 @@ const getIndividual = async (req, res) => {
   }
 };
 
-export { getDepartment, getIndividual };
+const getCommittee = async (req, res) => {
+  try {
+    const leaderboard = await Donor.aggregate([
+      {
+        $group: {
+          _id: "$committee",
+          totalGrainCollected: { $sum: "$grainCollected" },
+        },
+      },
+      {
+        $sort: { totalGrainCollected: -1 },
+      },
+    ]);
+    res.send(leaderboard);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
+
+export { getDepartment, getIndividual, getCommittee };
