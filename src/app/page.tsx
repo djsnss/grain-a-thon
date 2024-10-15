@@ -48,15 +48,23 @@ const ProgressCarousel = ({ progressData }) => {
   );
 };
 
-export default async function Home() {
-  let progressData = [];
+export default function Home() {
+  const [progressData, setProgressData] = useState([]);
 
-  try {
-    const res = await axios.get("http://localhost:8000/leaderboard/department");
-    progressData = res.data;
-  } catch (error) {
-    console.error("Error fetching leaderboard:", error);
+  async function fetchProgress() {
+    try {
+      const res = await axios.get(
+        "http://localhost:8000/leaderboard/department"
+      );
+      setProgressData(res.data);
+    } catch (error) {
+      console.error("Error fetching leaderboard:", error);
+    }
   }
+
+  useEffect(() => {
+    fetchProgress();
+  }, []);
 
   return (
     <div className="w-full flex justify-center items-center flex-col p-4">
@@ -77,7 +85,11 @@ export default async function Home() {
       </div>
 
       {/* Carousel */}
-      <ProgressCarousel progressData={progressData} />
+      {progressData.length > 0 ? (
+        <ProgressCarousel progressData={progressData} />
+      ) : (
+        <div>Loading...</div>
+      )}
     </div>
   );
 }
