@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import NSSLogo from './DJSNSSLogo.png'; // Example image
+import axios from 'axios'
 
 const ProgressCarousel = ({ progressData }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -19,7 +20,7 @@ const ProgressCarousel = ({ progressData }) => {
       <div className="relative w-full max-w-4xl">
         <AnimatePresence>
           <motion.div
-            key={progressData[currentIndex].id}
+            key={progressData[currentIndex]._id}
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
@@ -27,17 +28,17 @@ const ProgressCarousel = ({ progressData }) => {
           >
             <Image
               src={NSSLogo}
-              alt={progressData[currentIndex].label}
+              alt={progressData[currentIndex]._id}
               layout="fill"
               objectFit="cover"
               className="rounded-xl"
             />
             <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-center items-center text-center">
               <h2 className="text-white text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-wider">
-                {progressData[currentIndex].label}
+                {progressData[currentIndex]._id}
               </h2>
               <p className="text-white text-xl sm:text-2xl md:text-3xl font-semibold mt-2">
-                {progressData[currentIndex].value} Kgs
+                {progressData[currentIndex].totalGrainCollected} Kgs
               </p>
             </div>
           </motion.div>
@@ -47,17 +48,15 @@ const ProgressCarousel = ({ progressData }) => {
   );
 };
 
-export default function Home() {
-  const progressData = [
-    { id: '1', label: 'COMPS', value: 100, color: '#f94144' },
-    { id: '2', label: 'IT', value: 80, color: '#f3722c' },
-    { id: '3', label: 'CSDS', value: 40, color: '#f8961e' },
-    { id: '4', label: 'AIML', value: 90, color: '#f9c74f' },
-    { id: '5', label: 'AIDS', value: 65, color: '#90be6d' },
-    { id: '6', label: 'ICB', value: 45, color: '#43aa8b' },
-    { id: '7', label: 'EXTC', value: 55, color: '#4d908e' },
-    { id: '8', label: 'MECH', value: 55, color: '#577590' },
-  ];
+export default async function Home() {
+  let progressData = []
+
+  try {
+    const res = await axios.get('http://localhost:8000/leaderboard/department');
+    progressData = res.data
+  } catch (error) {
+    console.error('Error fetching leaderboard:', error);
+  }
 
   return (
     <div className="w-full flex justify-center items-center flex-col p-4">

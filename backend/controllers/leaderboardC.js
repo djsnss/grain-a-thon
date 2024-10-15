@@ -21,7 +21,7 @@ const getDepartment = async (req, res) => {
 
 const getDepartmentDonors = async (req, res) => {
   try {
-    const { department } = req.body;
+    const { department } = req.params;
     const leaderboard = await Donor.find({ department })
       .sort("-grainCollected")
       .limit(10);
