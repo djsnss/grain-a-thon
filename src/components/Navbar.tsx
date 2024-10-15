@@ -28,7 +28,7 @@ export function FloatingNavDemo() {
     {
       name: "Committees",
       link: "/committees",
-    }
+    },
   ];
 
   return (

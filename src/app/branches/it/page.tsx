@@ -1,5 +1,5 @@
-import VolunteerInfo from '@/components/VolunteerInfo';
-import '../comps/index.css';
+import VolunteerInfo from "@/components/VolunteerInfo";
+import "../comps/index.css";
 
 export default function IT() {
   return (

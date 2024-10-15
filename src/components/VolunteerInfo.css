@@ -10,7 +10,8 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Add a subtle separator between rows */
 }
 
-.volunteer-name, .volunteer-phone {
+.volunteer-name,
+.volunteer-phone {
   font-size: 1rem; /* Set a responsive font size */
   word-wrap: break-word; /* Ensures long words are wrapped */
 }
@@ -21,7 +22,8 @@
     padding: 5px;
   }
 
-  .volunteer-name, .volunteer-phone {
+  .volunteer-name,
+  .volunteer-phone {
     font-size: 0.875rem;
   }
 }

@@ -59,9 +59,4 @@ const getCommittee = async (req, res) => {
   }
 };
 
-export {
-  getDepartment,
-  getDepartmentDonors,
-  getCommittee,
-  getAll,
-};
+export { getDepartment, getDepartmentDonors, getCommittee, getAll };

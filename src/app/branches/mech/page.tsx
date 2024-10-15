@@ -1,8 +1,7 @@
-import VolunteerInfo from '@/components/VolunteerInfo';
-import '../comps/index.css'
+import VolunteerInfo from "@/components/VolunteerInfo";
+import "../comps/index.css";
 
 export default function Mech() {
-
   return (
     <div className="cinema-background min-h-screen w-[100vw] max-w-full m-0 p-0 overflow-x-hidden overflow-y-auto transition-all">
       <div className="overlay min-h-screen w-[100vw] max-w-full m-0 p-0 overflow-x-hidden overflow-y-auto transition-all"></div>

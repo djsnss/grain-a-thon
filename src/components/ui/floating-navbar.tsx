@@ -26,7 +26,7 @@ export const FloatingNav = ({
         transition={{ duration: 0.2 }}
         className={cn(
           "flex max-w-fit fixed top-10 inset-x-0 mx-auto border border-transparent dark:border-white/[0.2] rounded-full dark:bg-black bg-white shadow-md z-[5000] pr-4 pl-8 py-2 items-center justify-center space-x-6 sm:space-x-8",
-          className
+          className,
         )}
       >
         {navItems.map((navItem, idx) => (
@@ -37,7 +37,7 @@ export const FloatingNav = ({
             <Link
               href={navItem.link}
               className={cn(
-                "dark:text-neutral-50 flex flex-col items-center justify-center text-center text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 text-sm sm:text-base relative"
+                "dark:text-neutral-50 flex flex-col items-center justify-center text-center text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 text-sm sm:text-base relative",
               )}
               onClick={() =>
                 navItem.submenu && setDropdownOpen(!isDropdownOpen)

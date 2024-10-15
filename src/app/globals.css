@@ -3,22 +3,22 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Poppins';
-  src: url('../app/fonts/Poppins-Regular.ttf') format('truetype'); /* Path to the font file */
+  font-family: "Poppins";
+  src: url("../app/fonts/Poppins-Regular.ttf") format("truetype"); /* Path to the font file */
   font-weight: normal; /* Normal weight */
   font-style: normal; /* Normal style */
 }
 
 @font-face {
-  font-family: 'Poppins';
-  src: url('../app/fonts/Poppins-Bold.ttf') format('truetype'); /* Path to the bold font file */
+  font-family: "Poppins";
+  src: url("../app/fonts/Poppins-Bold.ttf") format("truetype"); /* Path to the bold font file */
   font-weight: bold; /* Bold weight */
   font-style: normal; /* Normal style */
 }
 
 @font-face {
-  font-family: 'Poppins';
-  src: url('../app/fonts/Poppins-Medium.ttf') format('truetype'); /* Path to the medium font file */
+  font-family: "Poppins";
+  src: url("../app/fonts/Poppins-Medium.ttf") format("truetype"); /* Path to the medium font file */
   font-weight: 500; /* Medium weight */
   font-style: normal; /* Normal style */
 }
@@ -36,7 +36,7 @@
 }
 
 :root {
-  background: linear-gradient(180deg, #A90202 0%, #430101 100%);
+  background: linear-gradient(180deg, #a90202 0%, #430101 100%);
 }
 
 body {
@@ -44,8 +44,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.cinema-background-home  {
-  background-image: url('/images/background.svg') !important;
+.cinema-background-home {
+  background-image: url("/images/background.svg") !important;
 }
 
 @layer utilities {
@@ -126,6 +126,6 @@ body {
   }
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   display: none;
 }

@@ -1,4 +1,5 @@
 # grain-a-thon
+
 A comprehensive SPA for Grain-A-Thon 2024 created by the Tech team of DJSNSS
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
