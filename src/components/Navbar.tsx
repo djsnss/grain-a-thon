@@ -21,8 +21,8 @@ export function FloatingNavDemo() {
         { name: "AIML", link: "/branches/aiml" },
         { name: "ICB", link: "/branches/icb" },
         { name: "MECH", link: "/branches/mech" },
-        { name: "ELEC", link: "/branches/extc" },
-        { name: "CS-DS", link: "/branches/csds" },
+        { name: "EXTC", link: "/branches/extc" },
+        { name: "CSDS", link: "/branches/csds" },
       ],
     },
     {
