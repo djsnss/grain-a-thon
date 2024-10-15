@@ -8,8 +8,7 @@ export const volunteerService = {
       );
       return response.data;
     } catch (error) {
-      console.error("Error:", error);
-      return [];
+      throw new Error(`${error}`) 
     }
   },
 };

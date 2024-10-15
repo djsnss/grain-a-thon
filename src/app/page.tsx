@@ -51,6 +51,18 @@ const ProgressCarousel = ({ progressData }) => {
 export default function Home() {
   const [progressData, setProgressData] = useState([]);
 
+  let progressDataTest = [
+    { _id: 'COMPS', totalGrainCollected: 100, color: '#f94144' },
+    {  _id: 'IT', totalGrainCollected: 80, color: '#f3722c' },
+    {  _id: 'CSDS', totalGrainCollected: 40, color: '#f8961e' },
+    {  _id: 'AIML', totalGrainCollected: 90, color: '#f9c74f' },
+    {  _id: 'AIDS', totalGrainCollected: 65, color: '#90be6d' },
+    {  _id: 'ICB', totalGrainCollected: 45, color: '#43aa8b' },
+    {  _id: 'EXTC', totalGrainCollected: 55, color: '#4d908e' },
+    {  _id: 'MECH', totalGrainCollected: 55, color: '#577590' },
+  ];
+
+
   async function fetchProgress() {
     try {
       const res = await axios.get(
@@ -58,6 +70,7 @@ export default function Home() {
       );
       setProgressData(res.data);
     } catch (error) {
+      setProgressData(progressDataTest)
       console.error("Error fetching leaderboard:", error);
     }
   }
