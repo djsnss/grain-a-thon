@@ -2,6 +2,64 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Poppins';
+  src: url('../app/fonts/Poppins-Regular.ttf') format('truetype'); /* Path to the font file */
+  font-weight: normal; /* Normal weight */
+  font-style: normal; /* Normal style */
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../app/fonts/Poppins-Bold.ttf') format('truetype'); /* Path to the bold font file */
+  font-weight: bold; /* Bold weight */
+  font-style: normal; /* Normal style */
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../app/fonts/Poppins-Medium.ttf') format('truetype'); /* Path to the medium font file */
+  font-weight: 500; /* Medium weight */
+  font-style: normal; /* Normal style */
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+:root {
+  background: linear-gradient(180deg, #A90202 0%, #430101 100%);
+}
+
+body {
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.cinema-background {
+  background-image: url('/images/background.svg');
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -66,4 +124,8 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+::-webkit-scrollbar{
+  display: none;
 }

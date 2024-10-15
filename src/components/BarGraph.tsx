@@ -42,7 +42,7 @@ const BarGraph = ({ data }) => {
         beginAtZero: true,
         ticks: {
           font: {
-            size: 14, 
+            size: 10, 
           },
         },
       },
@@ -60,7 +60,7 @@ const BarGraph = ({ data }) => {
   };
 
   return (
-    <div className="h-max w-[80%] max-w-full my-3 mx-2 bg-gray-100 p-6 rounded-lg shadow-md border-[16px] border-black">
+    <div className="h-max w-[95%] md:w-[80%] max-w-full my-3 mx-2 bg-gray-100 p-4 rounded-lg shadow-md border-[16px] border-black">
       <div className="h-[350px]"> 
         <Bar data={chartData} options={options} />
       </div>
