@@ -1,9 +1,8 @@
-'use client'
-import React, { useState,useEffect } from 'react';
+'use client';
+import React from 'react';
 import FilmStrip from "@/components/FilmStrip";
 import BarGraph from '@/components/BarGraph';
-import Navbar from '@/components/Navbar';
-
+import { FloatingNavDemo } from '@/components/Navbar';
 
 export default function Home() {
   const progressData = [
@@ -26,7 +25,7 @@ export default function Home() {
     "/images/th 10.jpg",
     "/images/th 11.jpg",
     "/images/th 12.jpg",
-  ]
+  ];
   
   const poster2 = [
     "/images/th 5.png",
@@ -37,39 +36,42 @@ export default function Home() {
     "/images/th 14.jpg",
     "/images/th 15.jpg",
     "/images/th 16.jpg",
-  ]
+  ];
   
   return (
-    <div className="cinema-background min-h-screen w-[100vw] max-w-full m-0 p-0 overflow-x-hidden overflow-y-auto transition-all">
-      {/* <Navbar/> */}
-      
-      <div className="h-full w-full max-w-full flex justify-between items-start flex-nowrap from-[#A90202] to-[#430101]">
-        
-        <FilmStrip images={poster1} />
-
-        <div className="h-max w-[70%] max-w-full flex justify-center items-center flex-col p-4">
-          
-          <div className="h-max w-full max-w-full p-2 flex justify-between items-center flex-row flex-wrap">
-            
-            <div className='h-max w-max max-w-full m-1 flex justify-between items-center gap-4'>
-              <img src="/images/Nss new logo-1.png" alt="NSS LOGO" className="h-16 rounded-3xl"/>
-              <p className="font-bold text-3xl m-1 tracking-widest">DJS NSS</p>
-            </div>
-
-            <p className="font-bold text-3xl m-1 tracking-widest">GRAIN-A-THON</p>
-            
-          </div>
-          
-          <div className="h-max w-max max-w-full my-2 pl-6 pr-4 py-2 text-5xl  font-extrabold tracking-[20px] border-4 border-black bg-[#FFFCE5] text-black">SHOWTIME</div>
-
-          {/* Bar Graph */}
-          <BarGraph data={progressData} />
-          
-          
+    <div className="cinema-background min-h-screen w-[100vw] max-w-full m-0 p-0 overflow-x-hidden overflow-y-auto transition-all">  
+      <FloatingNavDemo />
+      {/* Main Container */}    
+      <div className="h-full w-full max-w-full flex flex-col lg:flex-row justify-between items-start flex-nowrap bg-gradient-to-b from-red-500 to-red-950">
+        {/* Film Strip on the left */}
+        <div className="w-full lg:w-[15%]">
+          <FilmStrip images={poster1} />
         </div>
         
-        <FilmStrip images={poster2} />
-      
+        {/* Main Content */}
+        <div className="w-full lg:w-[70%] flex justify-center items-center flex-col p-4">
+          <div className="w-full flex flex-col sm:flex-row justify-between items-center sm:flex-wrap p-2">
+            <div className="flex items-center gap-4 m-1">
+              <img src="/images/Nss new logo-1.png" alt="NSS LOGO" className="h-16 rounded-3xl" />
+              <p className="font-bold text-2xl sm:text-3xl tracking-widest">DJS NSS</p>
+            </div>
+            <p className="font-bold text-2xl sm:text-3xl tracking-widest">GRAIN-A-THON</p>
+          </div>
+          
+          <div className="my-4 py-2 px-4 text-3xl sm:text-5xl font-extrabold tracking-[10px] sm:tracking-[20px] border-4 border-black bg-[#FFFCE5] text-black">
+            SHOWTIME
+          </div>
+          
+          {/* Bar Graph */}
+          <div className="w-full flex justify-center">
+            <BarGraph data={progressData} />
+          </div>
+        </div>
+
+        {/* Film Strip on the right */}
+        <div className="w-full flex justify-end lg:w-[15%]">
+          <FilmStrip images={poster2} />
+        </div>
       </div>
     </div>
   );
