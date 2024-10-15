@@ -36,7 +36,7 @@ export default function VolunteerInfo() {
     { _id: 21, name: 'B C K Z G V', grainCollected: '2 6  K G S' },
     { _id: 22, name: 'B C K Z G V', grainCollected: '2 6  K G S' },
     { _id: 23, name: 'B C K Z G V', grainCollected: '2 6  K G S' },
-    { _id: 23, name: 'B C K Z G V', grainCollected: '2 6  K G S' },
+    { _id: 24, name: 'B C K Z G V', grainCollected: '2 6  K G S' },
   ];
 
   const fetchVolunteers = async () => {
