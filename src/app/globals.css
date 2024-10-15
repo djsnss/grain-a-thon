@@ -44,8 +44,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.cinema-background {
-  background-image: url('/images/background.svg');
+.cinema-background-home  {
+  background-image: url('/images/background.svg') !important;
 }
 
 @layer utilities {
