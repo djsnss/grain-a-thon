@@ -18,7 +18,7 @@ const ProgressCarousel = ({ progressData }) => {
   }, [progressData.length]);
 
   return (
-    <div className="h-[500px] w-[750px] flex justify-center items-center overflow-hidden">
+    <div className="h-[300px] w-[300px] md:h-[500px] md:w-[750px] flex justify-center items-center overflow-hidden">
       <div className="relative h-full w-full max-w-4xl">
         <AnimatePresence>
           <motion.div
@@ -26,7 +26,7 @@ const ProgressCarousel = ({ progressData }) => {
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="relative w-full h-[200px] md:h-[300px] lg:h-[400px] rounded-xl overflow-hidden"
+            className="relative w-full h-[300px] md:h-[400px] rounded-xl overflow-hidden"
           >
             {/* <Image
               src={progressData[currentIndex].img}
@@ -45,13 +45,13 @@ const ProgressCarousel = ({ progressData }) => {
               </p>
             </div> */}
 
-            <div className="relative w-full h-[350px] mt-14 p-3 rounded-[14px] z-[1111] overflow-hidden flex flex-col items-center justify-center">
+            <div className="relative w-full h-[250px] md:h-[350px] mt-14 p-3 rounded-[14px] z-[1111] overflow-hidden flex flex-col items-center justify-center">
               <div className="blob" style={{backgroundColor: progressData[currentIndex].color}}></div>
               <div className="w-full h-full p-2 z-[2] bg-black backdrop-blur-[24px] rounded-[10px] overflow-hidden flex flex-col justify-end items-start">
                 <img src={progressData[currentIndex].img} alt={progressData[currentIndex]._id} className="absolute h-full w-full top-0 left-0 opacity-80"/>
                 
                 
-                <Link href={progressData[currentIndex].link} className="text-white text-3xl md:text-5xl font-extrabold tracking-wider mb-2 drop-shadow-lg">
+                <Link href={progressData[currentIndex].link} className="text-white text-3xl md:text-5xl font-extrabold tracking-wider md:mb-2 drop-shadow-lg">
                   {progressData[currentIndex]._id}
                 </Link>
                 <p className="text-white text-xl md:text-3xl font-semibold mt-2 drop-shadow-md">
@@ -99,8 +99,8 @@ export default function Home() {
 
   return (
     <div className="w-full flex justify-center items-center flex-col p-4">
-      <div className="w-full flex flex-col sm:flex-row justify-between items-center sm:flex-wrap p-2">
-        <div className="flex items-center gap-4 m-1">
+      <div className="w-full flex flex-col sm:flex-row justify-between items-center sm:flex-wrap mb-2 md:m-1 p-2">
+        <div className="flex items-center gap-4 m-1 ">
           <Image src={NSSLogo} alt="NSS LOGO" className="h-16 w-16" />
           <p className="font-bold text-2xl sm:text-3xl tracking-widest">
             DJS NSS
@@ -112,14 +112,14 @@ export default function Home() {
       </div>
       
       <div className="h-max w-full my-3 relative flex justify-center items-center flex-col flex-nowrap">
-        <img src="/images/cinema.jpg" alt="background" className="h-max w-full aspect-video absolute top-0 left-0"/>
-        <div className="mb-2 py-2 px-4 text-3xl sm:text-5xl font-extrabold tracking-[10px] sm:tracking-[20px] border-4 border-black bg-[#FFFCE5] text-black z-30 absolute -top-3 rounded-xl">SHOWTIME</div>
+        <img src="/images/cinema.jpg" alt="background" className="hidden md:block h-max w-full aspect-video absolute top-0 left-0 mb-4"/>
+        <div className="mb-2 py-1 px-2 md:py-2 md:px-4 text-2xl md:text-5xl font-extrabold tracking-[10px] sm:tracking-[20px] border-4 border-black bg-[#FFFCE5] text-black z-30 absolute -top-3 rounded-xl">SHOWTIME</div>
 
         {/* Carousel */}
         {progressData.length > 0 ? (
           <ProgressCarousel progressData={progressData} />
         ) : (
-          <div className="h-[320px] w-[750px] flex justify-center items-center flex-col gap-2 mt-20 rounded-2xl z-30">
+          <div className="h-[150px] w-[250px] md:h-[320px] md:w-[750px] flex justify-center items-center flex-col gap-3 md:mt-20 rounded-2xl z-30">
             <div className="text-2xl font-semibold text-black">Loading...</div>
             <div className="loader"></div>
           </div>

@@ -71,7 +71,7 @@ export default function RootLayout({
             </div>
 
             {/* Dynamic Main Content */}
-            <div className="w-[73%] flex justify-center items-center flex-col">
+            <div className="w-full md:w-[73%] flex justify-center items-center flex-col">
               {children}
             </div>
 

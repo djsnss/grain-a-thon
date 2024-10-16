@@ -2,6 +2,7 @@
 import React from "react";
 import { FloatingNav } from "./ui/floating-navbar";
 import { FaTrophy, FaBuilding } from "react-icons/fa";
+import { MdGroups } from "react-icons/md";
 
 export function FloatingNavDemo() {
   const navItems = [
@@ -28,6 +29,7 @@ export function FloatingNavDemo() {
     {
       name: "Committees",
       link: "/committees",
+      icon: <MdGroups />,
     },
   ];
 

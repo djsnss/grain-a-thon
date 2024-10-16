@@ -96,3 +96,9 @@
       transform: rotate(360deg);
     }
   }
+
+  @media screen {
+    .loader{
+        margin-top: 0px;
+    }
+  }

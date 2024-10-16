@@ -44,10 +44,11 @@ export const FloatingNav = ({
               }
             >
               <span className="block sm:hidden">{navItem.icon}</span>
-              <span>{navItem.name}</span>
+              <span className="text-xs md:text-sm">{navItem.name}</span>
               {/* Blue span for underline, centered below the text */}
                {/* <span className="absolute bottom-[-2px] w-3/4 h-[2.4px] bg-gradient-to-r from-transparent via-blue-500 to-transparent mt-1" />  */}
             </Link>
+            
             {/* Dropdown for submenu */}
             {navItem.submenu && isDropdownOpen && (
               <ul className="absolute top-full mt-2 left-0 bg-white dark:bg-black shadow-lg rounded-lg overflow-hidden z-[6000] text-black">
@@ -59,7 +60,7 @@ export const FloatingNav = ({
                         navItem.submenu && setDropdownOpen(!isDropdownOpen)
                       }
 
-                      className="block px-4 py-2 text-sm hover:bg-gray-200 dark:hover:bg-gray-700"
+                      className="block px-4 py-2 text-xs md:text-sm hover:bg-gray-200 dark:hover:bg-gray-700"
                     >
                       {submenuItem.name}
                     </Link>
