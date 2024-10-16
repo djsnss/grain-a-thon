@@ -45,7 +45,6 @@ export default function VolunteerInfo() {
         await volunteerService.getDepartmentVolunteers("Comps");
       setVolunteers(volunteers);
     } catch (error) {
-      console.log("here")
       setVolunteers(volunteersTest)
       console.error("Failed to fetch volunteers:", error);
     }
