@@ -46,7 +46,7 @@ export const FloatingNav = ({
               <span className="block sm:hidden">{navItem.icon}</span>
               <span>{navItem.name}</span>
               {/* Blue span for underline, centered below the text */}
-              {/* <span className="absolute bottom-[-2px] w-3/4 h-[2.4px] bg-gradient-to-r from-transparent via-blue-500 to-transparent mt-1" /> */}
+               <span className="absolute bottom-[-2px] w-3/4 h-[2.4px] bg-gradient-to-r from-transparent via-blue-500 to-transparent mt-1" /> 
             </Link>
             {/* Dropdown for submenu */}
             {navItem.submenu && isDropdownOpen && (
@@ -55,6 +55,10 @@ export const FloatingNav = ({
                   <li key={idx}>
                     <Link
                       href={submenuItem.link}
+                      onClick={() =>
+                        navItem.submenu && setDropdownOpen(!isDropdownOpen)
+                      }
+
                       className="block px-4 py-2 text-sm hover:bg-gray-200 dark:hover:bg-gray-700"
                     >
                       {submenuItem.name}
