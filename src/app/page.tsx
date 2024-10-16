@@ -18,8 +18,8 @@ const ProgressCarousel = ({ progressData }) => {
   }, [progressData.length]);
 
   return (
-    <div className="h-max w-[500px] flex justify-center items-center overflow-hidden">
-      <div className="relative w-full max-w-4xl">
+    <div className="h-[500px] w-[750px] flex justify-center items-center overflow-hidden">
+      <div className="relative h-full w-full max-w-4xl">
         <AnimatePresence>
           <motion.div
             key={progressData[currentIndex]._id}
@@ -45,10 +45,12 @@ const ProgressCarousel = ({ progressData }) => {
               </p>
             </div> */}
 
-            <div className="relative w-full h-[300px] p-3 rounded-[14px] z-[1111] overflow-hidden flex flex-col items-center justify-center">
+            <div className="relative w-full h-[350px] mt-14 p-3 rounded-[14px] z-[1111] overflow-hidden flex flex-col items-center justify-center">
               <div className="blob" style={{backgroundColor: progressData[currentIndex].color}}></div>
               <div className="w-full h-full p-2 z-[2] bg-black backdrop-blur-[24px] rounded-[10px] overflow-hidden flex flex-col justify-end items-start">
                 <img src={progressData[currentIndex].img} alt={progressData[currentIndex]._id} className="absolute h-full w-full top-0 left-0 opacity-80"/>
+                
+                
                 <Link href={progressData[currentIndex].link} className="text-white text-3xl md:text-5xl font-extrabold tracking-wider mb-2 drop-shadow-lg">
                   {progressData[currentIndex]._id}
                 </Link>
@@ -108,17 +110,22 @@ export default function Home() {
           GRAIN-A-THON
         </p>
       </div>
+      
+      <div className="h-max w-full my-3 relative flex justify-center items-center flex-col flex-nowrap">
+        <img src="/images/cinema.jpg" alt="background" className="h-max w-full aspect-video absolute top-0 left-0"/>
+        <div className="mb-2 py-2 px-4 text-3xl sm:text-5xl font-extrabold tracking-[10px] sm:tracking-[20px] border-4 border-black bg-[#FFFCE5] text-black z-30 absolute -top-3 rounded-xl">SHOWTIME</div>
 
-      <div className="my-4 py-2 px-4 text-3xl sm:text-5xl font-extrabold tracking-[10px] sm:tracking-[20px] border-4 border-black bg-[#FFFCE5] text-black">
-        SHOWTIME
+        {/* Carousel */}
+        {progressData.length > 0 ? (
+          <ProgressCarousel progressData={progressData} />
+        ) : (
+          <div className="h-[320px] w-[750px] flex justify-center items-center flex-col gap-2 mt-20 rounded-2xl z-30">
+            <div className="text-2xl font-semibold text-black">Loading...</div>
+            <div className="loader"></div>
+          </div>
+        )}
       </div>
 
-      {/* Carousel */}
-      {progressData.length > 0 ? (
-        <ProgressCarousel progressData={progressData} />
-      ) : (
-        <div>Loading...</div>
-      )}
     </div>
   );
 }

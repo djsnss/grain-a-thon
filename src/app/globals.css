@@ -36,7 +36,11 @@
 }
 
 :root {
-  background: linear-gradient(180deg, #a90202 0%, #430101 100%);
+  /* background: linear-gradient(180deg, #EDDAC6 0%, #F4EFDA 100%); */
+  background-image: url("/images/background.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 body {
