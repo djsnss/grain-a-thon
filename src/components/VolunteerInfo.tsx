@@ -55,7 +55,7 @@ export default function VolunteerInfo() {
   }, []);
 
   return (
-    <div className="volunteers-container text-xl w-full max-h-[40vh] flex flex-col justify-center">
+    <div className="volunteers-container text-xl w-full md:max-h-[40vh] max-h-[60vh] flex flex-col justify-center">
       {volunteers.length > 0 ? (
         volunteers.map((volunteer) => (
           <div
@@ -64,7 +64,7 @@ export default function VolunteerInfo() {
           >
             <div className="volunteer-name">{volunteer.name}</div>
             <div className="volunteer-phone">
-              {volunteer.grainCollected} K G S
+              <p>{volunteer.grainCollected} KGS</p>
             </div>
           </div>
         ))
