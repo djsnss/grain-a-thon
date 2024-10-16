@@ -47,7 +47,7 @@ const ProgressCarousel = ({ progressData, progressDataConstants }) => {
               </p>
             </div> */}
 
-            <div className="relative w-full h-[350px] mt-14 p-3 rounded-[14px] z-[1111] overflow-hidden flex flex-col items-center justify-center">
+            <div className="relative w-full h-[250px] md:h-[350px] mt-14 p-3 rounded-[14px] z-[1111] overflow-hidden flex flex-col items-center justify-center">
               <div
                 className="blob"
                 style={{ backgroundColor: progressDataConstants[currentId].color }}
@@ -159,7 +159,6 @@ export default function Home() {
           GRAIN-A-THON
         </p>
       </div>
-
       <div className="h-max w-full my-3 relative flex justify-center items-center flex-col flex-nowrap">
         <img
           src="/images/cinema.jpg"
