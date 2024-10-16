@@ -56,7 +56,7 @@ export default function VolunteerInfo() {
   }, []);
 
   return (
-    <div className="volunteers-container w-full max-h-[40vh] flex flex-col justify-center overflow-y-auto">
+    <div className="volunteers-container text-xl w-full max-h-[40vh] flex flex-col justify-center">
       {volunteers.length > 0 ? (
         volunteers.map((volunteer) => (
           <div

@@ -84,7 +84,7 @@ export default function Home() {
       const res = await axios.get(
         "http://localhost:8000/leaderboard/department"
       );
-      setProgressData(res.data);
+      setProgressData(() => res.data);
     } catch (error) {
       setProgressData(progressDataTest)
       console.error("Error fetching leaderboard:", error);

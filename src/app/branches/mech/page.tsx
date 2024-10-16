@@ -1,5 +1,5 @@
 import VolunteerInfo from "@/components/VolunteerInfo";
-import "../comps/index.css";
+import "./index.css";
 
 export default function Mech() {
   return (
