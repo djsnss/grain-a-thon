@@ -1,10 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import axios from "axios";
-import Link from "next/link";
 import Image from "next/image";
-import NSSLogo from "../DJSNSSLogo.png";
+import NSSLogo from "../DJSNSSLogo.png"; // Example image
+import axios from "axios";
+import '../page.css'
 
 const ProgressCarousel = ({ progressData }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -12,36 +12,32 @@ const ProgressCarousel = ({ progressData }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % progressData.length);
-    }, 3000); // Automatically scrolls every 3 seconds
+    }, 5000); // Automatically scrolls every 5 seconds
     return () => clearInterval(interval);
   }, [progressData.length]);
 
   return (
-    <div className="h-max w-[500px] flex justify-center items-center overflow-hidden">
-      <div className="relative w-full max-w-4xl">
+    <div className="h-[500px] w-[750px] flex justify-center items-center overflow-hidden">
+      <div className="relative h-full w-full max-w-4xl">
         <AnimatePresence>
           <motion.div
-            key={progressData[currentIndex].label}
+            key={progressData[currentIndex].id}
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             className="relative w-full h-[200px] md:h-[300px] lg:h-[400px] rounded-xl overflow-hidden"
           >
-            <Image
-              src={progressData[currentIndex].img}
-              alt={progressData[currentIndex].label}
-              layout="fill"
-              objectFit=""
-              className="rounded-xl scale-90"
-            />
-            <div className="absolute inset-0 flex flex-col justify-end items-start p-8 md:p-12"
-              style={{ background: `linear-gradient(to top, ${progressData[currentIndex].color}, transparent)`}}>
-
-                {progressData[currentIndex].label}
-              
-              <p className="text-white text-xl md:text-3xl font-semibold mt-2 drop-shadow-md">
-                {progressData[currentIndex].value} Kgs
-              </p>
+            <div className="relative w-full h-[350px] mt-14 p-3 rounded-[14px] z-[1111] overflow-hidden flex flex-col items-center justify-center">
+              <div className="blob" style={{backgroundColor: progressData[currentIndex].color}}></div>
+              <div className="w-full h-full p-2 z-[2] bg-black backdrop-blur-[24px] rounded-[10px] overflow-hidden flex flex-col justify-end items-start">
+                <img src={progressData[currentIndex].img} alt={progressData[currentIndex].label} className="absolute h-full w-full top-0 left-0 opacity-80"/>
+                  <div className="text-white text-3xl md:text-5xl font-extrabold tracking-wider mb-2 drop-shadow-lg">
+                    {progressData[currentIndex].label}
+                  </div>
+                <p className="text-white text-xl md:text-3xl font-semibold mt-2 drop-shadow-md">
+                  {progressData[currentIndex].value} Kgs
+                </p>
+              </div>
             </div>
           </motion.div>
         </AnimatePresence>
@@ -50,8 +46,7 @@ const ProgressCarousel = ({ progressData }) => {
   );
 };
 
-
-function Page() {
+export default function Home() {
   const [progressData, setProgressData] = useState([]);
 
   const progressDataTest = [
@@ -80,12 +75,13 @@ function Page() {
     { id: "23", label: "GDSC", value: 30, color: "#f3722c", img:'/images/th 14.jpg' },
     { id: "24", label: "NSDC", value: 20, color: "#f94144", img:'/images/th 14.jpg' },
   ];
+
   async function fetchProgress() {
     try {
       const res = await axios.get(
         "http://localhost:8000/committees"
       );
-      setProgressData(res.data);
+      setProgressData(() => res.data);
     } catch (error) {
       setProgressData(progressDataTest)
       console.error("Error fetching leaderboard:", error);
@@ -109,21 +105,22 @@ function Page() {
           GRAIN-A-THON
         </p>
       </div>
+      
+      <div className="h-max w-full my-3 relative flex justify-center items-center flex-col flex-nowrap">
+        <img src="/images/cinema.jpg" alt="background" className="h-max w-full aspect-video absolute top-0 left-0"/>
+        <div className="mb-2 py-2 px-4 text-3xl sm:text-5xl font-extrabold tracking-[10px] sm:tracking-[20px] border-4 border-black bg-[#FFFCE5] text-black z-30 absolute -top-3 rounded-xl">SHOWTIME</div>
 
-      <div className="my-4 py-2 px-4 text-3xl sm:text-5xl font-extrabold tracking-[10px] sm:tracking-[20px] border-4 border-black bg-[#FFFCE5] text-black">
-        SHOWTIME
+        {/* Carousel */}
+        {progressData.length > 0 ? (
+          <ProgressCarousel progressData={progressData} />
+        ) : (
+          <div className="h-[320px] w-[750px] flex justify-center items-center flex-col gap-2 mt-20 rounded-2xl z-30">
+            <div className="text-2xl font-semibold text-black">Loading...</div>
+            <div className="loader"></div>
+          </div>
+        )}
       </div>
 
-      {/* Bar Graph */}
-      <div className="w-full flex justify-center"></div>
-      {progressData.length > 0 ? (
-  <ProgressCarousel progressData={progressData} />
-) : (
-  <div>Loading...</div>
-)}
     </div>
-    
-);
+  );
 }
-
-export default Page;
