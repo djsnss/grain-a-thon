@@ -1,4 +1,5 @@
 .volunteers-container {
+  display: flow-root;
   max-height: 40vh; /* Ensures the component takes up 40% of the viewport height */
   overflow-y: auto; /* Allows scrolling when the content exceeds the height */
 }
