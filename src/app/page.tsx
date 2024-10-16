@@ -33,7 +33,28 @@ const ProgressCarousel = ({ progressData, progressDataConstants }) => {
             transition={{ duration: 0.6 }}
             className="relative w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] rounded-xl overflow-hidden"
           >
+<<<<<<< HEAD
             <div className="relative w-full h-full p-3 rounded-[14px] flex flex-col items-center justify-center overflow-hidden z-[1111]">
+=======
+            {/* <Image
+              src={progressData[currentIndex].img}
+              alt={progressData[currentIndex]._id}
+              layout="fill"
+              objectFit=""
+              className="rounded-xl scale-90"
+            />
+            <div className="absolute inset-0 flex flex-col justify-end items-start p-8 md:p-12"
+              style={{ background: `linear-gradient(to top, ${progressData[currentIndex].color}, transparent)`}}>
+              <Link href={progressData[currentIndex].link} className="text-white text-3xl md:text-5xl font-extrabold tracking-wider mb-2 drop-shadow-lg">
+                {progressData[currentIndex]._id}
+              </Link>
+              <p className="text-white text-xl md:text-3xl font-semibold mt-2 drop-shadow-md">
+                {progressData[currentIndex].totalGrainCollected} Kgs
+              </p>
+            </div> */}
+
+            <div className="relative w-full h-[250px] md:h-[350px] mt-14 p-3 rounded-[14px] z-[1111] overflow-hidden flex flex-col items-center justify-center">
+>>>>>>> a567589097c59f15ed514f2bbef60fc9fe1965e0
               <div
                 className="blob"
                 style={{ backgroundColor: progressDataConstants[currentId]?.color }}
@@ -110,7 +131,6 @@ export default function Home() {
         </div>
         <p className="font-bold text-2xl sm:text-3xl tracking-widest">GRAIN-A-THON</p>
       </div>
-
       <div className="h-max w-full my-3 relative flex justify-center items-center flex-col flex-nowrap">
         <img
           src="/images/cinema.jpg"
