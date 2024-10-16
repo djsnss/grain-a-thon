@@ -69,8 +69,11 @@ export default function VolunteerInfo() {
           </div>
         ))
       ) : (
-        <div className="flex justify-between">No volunteers found</div>
-      )}
+      <div className="h-[320px] w-[750px] flex justify-center items-center flex-col gap-2 mt-20 rounded-2xl z-30">
+        <div className="text-2xl font-semibold text-black">Loading...</div>
+        <div className="loader"></div>
+      </div>
+  )}
     </div>
   );
 }

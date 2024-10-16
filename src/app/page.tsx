@@ -5,14 +5,16 @@ import Image from "next/image";
 import NSSLogo from "./DJSNSSLogo.png"; // Example image
 import axios from "axios";
 import Link from "next/link";
-import './page.css'
+import "./page.css";
 
-const ProgressCarousel = ({ progressData }) => {
+const ProgressCarousel = ({ progressData, progressDataConstants }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentId, setCurrentId] = useState('');
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % progressData.length);
+      setCurrentId(() => progressData[currentIndex]._id)
     }, 5000); // Automatically scrolls every 5 seconds
     return () => clearInterval(interval);
   }, [progressData.length]);
@@ -45,13 +47,22 @@ const ProgressCarousel = ({ progressData }) => {
               </p>
             </div> */}
 
-            <div className="relative w-full h-[250px] md:h-[350px] mt-14 p-3 rounded-[14px] z-[1111] overflow-hidden flex flex-col items-center justify-center">
-              <div className="blob" style={{backgroundColor: progressData[currentIndex].color}}></div>
+            <div className="relative w-full h-[350px] mt-14 p-3 rounded-[14px] z-[1111] overflow-hidden flex flex-col items-center justify-center">
+              <div
+                className="blob"
+                style={{ backgroundColor: progressDataConstants[currentId].color }}
+              ></div>
               <div className="w-full h-full p-2 z-[2] bg-black backdrop-blur-[24px] rounded-[10px] overflow-hidden flex flex-col justify-end items-start">
-                <img src={progressData[currentIndex].img} alt={progressData[currentIndex]._id} className="absolute h-full w-full top-0 left-0 opacity-80"/>
-                
-                
-                <Link href={progressData[currentIndex].link} className="text-white text-3xl md:text-5xl font-extrabold tracking-wider md:mb-2 drop-shadow-lg">
+                <img
+                  src={progressDataConstants[currentId].img}
+                  alt={progressData[currentIndex]._id}
+                  className="absolute h-full w-full top-0 left-0 opacity-80"
+                />
+
+                <Link
+                  href={`/branches/${progressData[currentIndex]._id}`}
+                  className="text-white text-3xl md:text-5xl font-extrabold tracking-wider mb-2 drop-shadow-lg"
+                >
                   {progressData[currentIndex]._id}
                 </Link>
                 <p className="text-white text-xl md:text-3xl font-semibold mt-2 drop-shadow-md">
@@ -69,6 +80,45 @@ const ProgressCarousel = ({ progressData }) => {
 export default function Home() {
   const [progressData, setProgressData] = useState([]);
 
+  let progressDataConstants = {
+    'COMPS': {
+      color: "#f94144",
+      img: "/images/poster1.jpg",
+      link: "/branches/comps",
+    },
+    'IT': { color: "#f3722c", img: "/images/poster2.jpg", link: "/branches/it" },
+    'CSDS': {
+      color: "#f8961e",
+      img: "/images/poster3.jpg",
+      link: "/branches/csds",
+    },
+    'AIML': {
+      color: "#f9c74f",
+      img: "/images/poster4.jpg",
+      link: "/branches/aiml",
+    },
+    'AIDS': {
+      color: "#90be6d",
+      img: "/images/poster5.jpg",
+      link: "/branches/aids",
+    },
+    'ICB': {
+      color: "#43aa8b",
+      img: "/images/poster6.jpg",
+      link: "/branches/icb",
+    },
+    'EXTC': {
+      color: "#4d908e",
+      img: "/images/poster7.jpg",
+      link: "/branches/extc",
+    },
+    'MECH': {
+      color: "#577590",
+      img: "/images/poster8.jpg",
+      link: "/branches/mech",
+    },
+  };
+
   let progressDataTest = [
     { _id: 'COMPS', totalGrainCollected: 100, color: '#f94144', img:'/images/poster1.jpg', link: "/branches/comps" },
     {  _id: 'IT', totalGrainCollected: 80, color: '#f3722c', img:'/images/poster2.jpg', link: "/branches/it" },
@@ -80,7 +130,6 @@ export default function Home() {
     {  _id: 'MECH', totalGrainCollected: 55, color: '#577590', img:'/images/poster8.jpg', link: "/branches/mech" },
   ];
 
-
   async function fetchProgress() {
     try {
       const res = await axios.get(
@@ -88,7 +137,7 @@ export default function Home() {
       );
       setProgressData(() => res.data);
     } catch (error) {
-      setProgressData(progressDataTest)
+      setProgressData(progressDataTest);
       console.error("Error fetching leaderboard:", error);
     }
   }
@@ -110,14 +159,20 @@ export default function Home() {
           GRAIN-A-THON
         </p>
       </div>
-      
+
       <div className="h-max w-full my-3 relative flex justify-center items-center flex-col flex-nowrap">
-        <img src="/images/cinema.jpg" alt="background" className="hidden md:block h-max w-full aspect-video absolute top-0 left-0 mb-4"/>
-        <div className="mb-2 py-1 px-2 md:py-2 md:px-4 text-2xl md:text-5xl font-extrabold tracking-[10px] sm:tracking-[20px] border-4 border-black bg-[#FFFCE5] text-black z-30 absolute -top-3 rounded-xl">SHOWTIME</div>
+        <img
+          src="/images/cinema.jpg"
+          alt="background"
+          className="h-max w-full aspect-video absolute top-0 left-0"
+        />
+        <div className="mb-2 py-2 px-4 text-3xl sm:text-5xl font-extrabold tracking-[10px] sm:tracking-[20px] border-4 border-black bg-[#FFFCE5] text-black z-30 absolute -top-3 rounded-xl">
+          SHOWTIME
+        </div>
 
         {/* Carousel */}
         {progressData.length > 0 ? (
-          <ProgressCarousel progressData={progressData} />
+          <ProgressCarousel progressData={progressData} progressDataConstants={progressDataConstants} />
         ) : (
           <div className="h-[150px] w-[250px] md:h-[320px] md:w-[750px] flex justify-center items-center flex-col gap-3 md:mt-20 rounded-2xl z-30">
             <div className="text-2xl font-semibold text-black">Loading...</div>
@@ -125,7 +180,6 @@ export default function Home() {
           </div>
         )}
       </div>
-
     </div>
   );
 }
