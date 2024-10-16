@@ -5,6 +5,7 @@ import Image from "next/image";
 import NSSLogo from "./DJSNSSLogo.png"; // Example image
 import axios from "axios";
 import Link from "next/link";
+import './page.css'
 
 const ProgressCarousel = ({ progressData }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -12,7 +13,7 @@ const ProgressCarousel = ({ progressData }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % progressData.length);
-    }, 3000); // Automatically scrolls every 3 seconds
+    }, 5000); // Automatically scrolls every 5 seconds
     return () => clearInterval(interval);
   }, [progressData.length]);
 
@@ -27,7 +28,7 @@ const ProgressCarousel = ({ progressData }) => {
             transition={{ duration: 0.6 }}
             className="relative w-full h-[200px] md:h-[300px] lg:h-[400px] rounded-xl overflow-hidden"
           >
-            <Image
+            {/* <Image
               src={progressData[currentIndex].img}
               alt={progressData[currentIndex]._id}
               layout="fill"
@@ -42,6 +43,19 @@ const ProgressCarousel = ({ progressData }) => {
               <p className="text-white text-xl md:text-3xl font-semibold mt-2 drop-shadow-md">
                 {progressData[currentIndex].totalGrainCollected} Kgs
               </p>
+            </div> */}
+
+            <div className="relative w-full h-[300px] p-3 rounded-[14px] z-[1111] overflow-hidden flex flex-col items-center justify-center">
+              <div className="blob" style={{backgroundColor: progressData[currentIndex].color}}></div>
+              <div className="w-full h-full p-2 z-[2] bg-black backdrop-blur-[24px] rounded-[10px] overflow-hidden flex flex-col justify-end items-start">
+                <img src={progressData[currentIndex].img} alt={progressData[currentIndex]._id} className="absolute h-full w-full top-0 left-0 opacity-80"/>
+                <Link href={progressData[currentIndex].link} className="text-white text-3xl md:text-5xl font-extrabold tracking-wider mb-2 drop-shadow-lg">
+                  {progressData[currentIndex]._id}
+                </Link>
+                <p className="text-white text-xl md:text-3xl font-semibold mt-2 drop-shadow-md">
+                  {progressData[currentIndex].totalGrainCollected} Kgs
+                </p>
+              </div>
             </div>
           </motion.div>
         </AnimatePresence>
@@ -54,14 +68,14 @@ export default function Home() {
   const [progressData, setProgressData] = useState([]);
 
   let progressDataTest = [
-    { _id: 'COMPS', totalGrainCollected: 100, color: '#f94144', img:'/images/th 9.jpg', link: "/branches/comps" },
-    {  _id: 'IT', totalGrainCollected: 80, color: '#f3722c', img:'/images/th 10.jpg', link: "/branches/it" },
-    {  _id: 'CSDS', totalGrainCollected: 40, color: '#f8961e', img:'/images/th 11.jpg', link: "/branches/csds" },
-    {  _id: 'AIML', totalGrainCollected: 90, color: '#f9c74f', img:'/images/th 12.jpg', link: "/branches/aiml" },
-    {  _id: 'AIDS', totalGrainCollected: 65, color: '#90be6d', img:'/images/th 13.jpg', link: "/branches/aids" },
-    {  _id: 'ICB', totalGrainCollected: 45, color: '#43aa8b', img:'/images/th 14.jpg', link: "/branches/icb" },
-    {  _id: 'EXTC', totalGrainCollected: 55, color: '#4d908e', img:'/images/th 15.jpg', link: "/branches/extc" },
-    {  _id: 'MECH', totalGrainCollected: 55, color: '#577590', img:'/images/th 16.jpg', link: "/branches/mech" },
+    { _id: 'COMPS', totalGrainCollected: 100, color: '#f94144', img:'/images/poster1.jpg', link: "/branches/comps" },
+    {  _id: 'IT', totalGrainCollected: 80, color: '#f3722c', img:'/images/poster2.jpg', link: "/branches/it" },
+    {  _id: 'CSDS', totalGrainCollected: 40, color: '#f8961e', img:'/images/poster3.jpg', link: "/branches/csds" },
+    {  _id: 'AIML', totalGrainCollected: 90, color: '#f9c74f', img:'/images/poster4.jpg', link: "/branches/aiml" },
+    {  _id: 'AIDS', totalGrainCollected: 65, color: '#90be6d', img:'/images/poster5.jpg', link: "/branches/aids" },
+    {  _id: 'ICB', totalGrainCollected: 45, color: '#43aa8b', img:'/images/poster6.jpg', link: "/branches/icb" },
+    {  _id: 'EXTC', totalGrainCollected: 55, color: '#4d908e', img:'/images/poster7.jpg', link: "/branches/extc" },
+    {  _id: 'MECH', totalGrainCollected: 55, color: '#577590', img:'/images/poster8.jpg', link: "/branches/mech" },
   ];
 
 
