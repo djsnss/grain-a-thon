@@ -1,0 +1,104 @@
+
+.blob {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  opacity: 1;
+  filter: blur(12px);
+  animation: blob-bounce 5s infinite ease;
+}
+
+@keyframes blob-bounce {
+  0% {
+    transform: translate(-100%, -100%) translate3d(0, 0, 0);
+  }
+
+  25% {
+    transform: translate(-100%, -100%) translate3d(100%, 0, 0);
+  }
+
+  50% {
+    transform: translate(-100%, -100%) translate3d(100%, 100%, 0);
+  }
+
+  75% {
+    transform: translate(-100%, -100%) translate3d(0, 100%, 0);
+  }
+
+  100% {
+    transform: translate(-100%, -100%) translate3d(0, 0, 0);
+  }
+}
+
+
+
+
+
+
+
+
+
+/* loader */
+.loader {
+    position: relative;
+    transform: scale(2);
+    border-radius: 50%;
+    border: 1px solid;
+    width: 30px;
+    height: 30px;
+    color: black;
+    margin-top: 150px;
+  }
+  
+  .loader::after {
+    position: absolute;
+    width: 0px;
+    height: 10px;
+    display: block;
+    border-left: 1px solid black;
+    content: '';
+    left: 14px;
+    border-radius: 1px;
+    top: 4px;
+    animation-duration: 1s;
+  }
+  
+  .loader::before {
+    position: absolute;
+    width: 0px;
+    height: 10px;
+    display: block;
+    border-left: 1px solid black;
+    content: '';
+    left: 14px;
+    border-radius: 1px;
+    top: 4px;
+    animation-duration: 40s;
+  }
+  
+  .loader::before,.loader::after {
+    transform-origin: bottom;
+    animation-name: dial;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+  
+  @keyframes dial {
+    0% {
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media screen {
+    .loader{
+        margin-top: 0px;
+    }
+  }

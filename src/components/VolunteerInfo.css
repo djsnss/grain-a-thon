@@ -1,0 +1,23 @@
+.volunteers-container {
+  display: flow-root;
+  overflow-y: auto; /* Allows scrolling when the content exceeds the height */
+}
+
+.volunteer-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Add a subtle separator between rows */
+}
+
+.volunteer-name,
+.volunteer-phone {
+  word-wrap: break-word; /* Ensures long words are wrapped */
+}
+
+@media (max-width: 768px) {
+  /* On smaller screens, reduce padding and font sizes */
+  .volunteer-info {
+    padding: 5px;
+  }
+}
