@@ -42,8 +42,9 @@ const ProgressCarousel = ({ progressData, progressDataConstants }) => {
                 <img
                   src={progressDataConstants[currentId]?.img}
                   alt={Object.keys(progressData[currentIndex])[0]}
-                  className="absolute h-full w-full top-0 left-0 opacity-80 object-cover rounded-2xl"
+                  className="absolute h-full w-full top-0 left-0 opacity-80 object-cover rounded-2xl "
                 />
+                <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-20 rounded-2xl"></div>
                 <div className="p-10">
                   <Link
                     href={`/branches/${
@@ -80,7 +81,11 @@ export default function Home() {
       img: "/images/poster1.jpg",
       link: "/branches/comps",
     },
-    it: { color: "#f3722c", img: "/images/poster2.jpg", link: "/branches/it" },
+    it: { 
+      color: "#f3722c", 
+      img: "/images/poster2.jpg", 
+      link: "/branches/it" 
+    },
     csds: {
       color: "#f8961e",
       img: "/images/poster3.jpg",
