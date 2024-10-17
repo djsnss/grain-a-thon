@@ -9,7 +9,7 @@ import {
 const router = express.Router();
 
 router.get("/department", getDepartment);
-router.get("/departmentDonors", getDepartmentDonors);
+router.get("/departmentDonors/:department", getDepartmentDonors);
 router.get("/all", getAll);
 router.get("/committee", getCommittee);
 
