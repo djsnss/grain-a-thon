@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@material-ui/core": "^4.12.4",
     "@nextui-org/card": "^2.0.34",
     "@nextui-org/react": "^2.4.8",
     "axios": "^1.7.7",
