@@ -6,8 +6,48 @@ import NSSLogo from "./DJSNSSLogo.png";
 import axios from "axios";
 import Link from "next/link";
 import "./page.css";
+interface ProgressDataItem {
+  [branch: string]: {
+    totalGrainCollected: number;
+    Rice: number;
+    Wheat: number;
+  };
+}
+interface Entry {
+  Branch?: string;
+  Rice?: string | number;
+  Wheat?: string | number;
+}
 
-const ProgressCarousel = ({ progressData, progressDataConstants }) => {
+interface BranchTotals {
+  [branch: string]: {
+    Rice: number;
+    Wheat: number;
+  };
+}
+
+type Progress = {
+  [branch: string]: {
+    totalGrainCollected: number;
+    Rice: number;
+    Wheat: number;
+  };
+};
+
+interface ProgressConstants {
+  [branch: string]: {
+    color: string;
+    img: string;
+    link: string;
+  };
+}
+
+interface ProgressCarouselProps {
+  progressData: ProgressDataItem[];
+  progressDataConstants: ProgressConstants;
+}
+
+const ProgressCarousel: React.FC<ProgressCarouselProps> = ({ progressData, progressDataConstants }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentId, setCurrentId] = useState("");
 
@@ -47,9 +87,8 @@ const ProgressCarousel = ({ progressData, progressDataConstants }) => {
                 <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-20 rounded-2xl"></div>
                 <div className="p-10">
                   <Link
-                    href={`/branches/${
-                      Object.keys(progressData[currentIndex])[0]
-                    }`}
+                    href={`/branches/${Object.keys(progressData[currentIndex])[0]
+                      }`}
                     className="text-white text-xl sm:text-3xl lg:text-7xl font-extrabold tracking-wider mb-2 drop-shadow-lg z-[10] uppercase"
                   >
                     {Object.keys(progressData[currentIndex])[0]}
@@ -73,7 +112,7 @@ const ProgressCarousel = ({ progressData, progressDataConstants }) => {
 };
 
 export default function Home() {
-  const [progressData, setProgressData] = useState([]); // Initialize as an array
+  const [progressData, setProgressData] = useState<Progress[]>([]);
 
   const progressDataConstants = {
     comps: {
@@ -81,10 +120,10 @@ export default function Home() {
       img: "/images/poster1.jpg",
       link: "/branches/comps",
     },
-    it: { 
-      color: "#f3722c", 
-      img: "/images/poster2.jpg", 
-      link: "/branches/it" 
+    it: {
+      color: "#f3722c",
+      img: "/images/poster2.jpg",
+      link: "/branches/it"
     },
     csds: {
       color: "#f8961e",
@@ -120,56 +159,48 @@ export default function Home() {
 
   async function fetchProgress() {
     try {
-      console.log(process.env.NEXT_PUBLIC_API_URL);
+      console.log("Fetching data from API:", process.env.NEXT_PUBLIC_API_URL);
       const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/data`);
-      let data = res.data;
-      console.log(data);
-
-      const branchTotals = {};
-
-      // Iterate through each entry in the data
-      data.forEach((entry) => {
-        const branch = entry.Branch ? entry.Branch.toLowerCase() : null; // Convert branch to lowercase
-        const rice = entry.Rice;
-        const wheat = entry.Wheat;
-
-        // Check if the branch and rice/wheat values are valid
-        if (branch && !isNaN(rice) && !isNaN(wheat)) {
-          const riceAmount = parseInt(rice);
-          const wheatAmount = parseInt(wheat);
-
-          // Initialize the branch in the object if not already present
-          if (!branchTotals[branch]) {
-            branchTotals[branch] = { Rice: 0, Wheat: 0 };
-          }
-
-          // Accumulate the totals
+      const data: Entry[] = res.data || [];
+  
+      console.log("Fetched raw data:", data);
+  
+      const branchTotals: BranchTotals = {};
+  
+      data.forEach((entry: Entry) => {
+        const branch = entry.Branch?.toLowerCase();
+        const riceAmount = parseInt(entry.Rice as string) || 0;
+        const wheatAmount = parseInt(entry.Wheat as string) || 0;
+  
+        if (branch) {
+          branchTotals[branch] = branchTotals[branch] || { Rice: 0, Wheat: 0 };
           branchTotals[branch].Rice += riceAmount;
           branchTotals[branch].Wheat += wheatAmount;
         }
       });
-
-      console.log(branchTotals);
-
-      const formattedProgressData = Object.entries(branchTotals).map(
+  
+      console.log("Processed branch totals:", branchTotals);
+  
+      const formattedProgressData: Progress[] = Object.entries(branchTotals).map(
         ([branch, totals]) => ({
           [branch]: {
-            totalGrainCollected: totals.Rice + totals.Wheat, // Total grain collected
+            totalGrainCollected: totals.Rice + totals.Wheat,
             Rice: totals.Rice,
             Wheat: totals.Wheat,
           },
         })
       );
-
-      setProgressData(formattedProgressData); // Set the formatted data
-
-      // Log the formatted data for debugging
+  
       console.log("Formatted progress data set:", formattedProgressData);
+      setProgressData(formattedProgressData);
     } catch (error) {
-      console.error("Error fetching leaderboard:", error);
+      if (axios.isAxiosError(error)) {
+        console.error("Error fetching progress data:", error.response?.data || error.message);
+      } else {
+        console.error("Error fetching progress data:", error);
+      }
     }
   }
-
   useEffect(() => {
     fetchProgress();
   }, []);
