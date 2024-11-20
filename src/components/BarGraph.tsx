@@ -8,18 +8,22 @@ import {
   Title,
   Tooltip,
   Legend,
+  TooltipItem,
 } from "chart.js";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const BarGraph = ({ data }) => {
+type DataItem = {
+  label: string;
+  value: number;
+  color: string;
+};
+
+type BarGraphProps = {
+  data: DataItem[];
+};
+
+const BarGraph: React.FC<BarGraphProps> = ({ data }) => {
   const chartData = {
     labels: data.map((item) => item.label),
     datasets: [
@@ -32,16 +36,15 @@ const BarGraph = ({ data }) => {
     ],
   };
 
-  // Chart options
   const options = {
     responsive: true,
     maintainAspectRatio: false,
-    indexAxis: "y",
+    indexAxis: "y" as const,
     scales: {
       x: {
         beginAtZero: true,
         ticks: {
-          callback: (value) => `${value}%`,
+          callback: (value: number) => `${value}%`,
         },
       },
       y: {
@@ -59,7 +62,10 @@ const BarGraph = ({ data }) => {
       },
       tooltip: {
         callbacks: {
-          label: (tip) => `${tip.raw}%`,
+          label: (tooltipItem: TooltipItem<"bar">) => {
+            const rawValue = tooltipItem.raw as number; // Ensure `raw` is treated as a number
+            return `${rawValue}%`;
+          },
         },
       },
     },
