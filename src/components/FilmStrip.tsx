@@ -1,38 +1,30 @@
 "use client";
 import React, { useState, useEffect } from "react";
 
-const FilmStrip = ({ images }) => {
+const FilmStrip = ({ images }: { images: string[] }) => {
   const [translateY, setTranslateY] = useState(0);
   const [translateX, setTranslateX] = useState(0);
 
-  // Vertical scrolling effect for larger devices (md and up)
+  // Vertical scrolling effect for larger devices
   useEffect(() => {
-    const animationDuration = 10000;
-    const stepSize = 1;
-    const interval = animationDuration / (images.length * 100);
+    const animationStep = 1;
+    const animationDuration = 50; // Milliseconds per step
 
     const timer = setInterval(() => {
-      setTranslateY((prev) => {
-        const newValue = prev - stepSize;
-        return newValue <= -(images.length * 200) ? 0 : newValue;
-      });
-    }, interval);
+      setTranslateY((prev) => (prev - animationStep) % (images.length * 200));
+    }, animationDuration);
 
     return () => clearInterval(timer);
   }, [images]);
 
-  // Horizontal scrolling effect for smaller devices (below md)
+  // Horizontal scrolling effect for smaller devices
   useEffect(() => {
-    const animationDuration = 10000;
-    const stepSize = 1;
-    const interval = animationDuration / (images.length * 100);
+    const animationStep = 1;
+    const animationDuration = 50; // Milliseconds per step
 
     const timer = setInterval(() => {
-      setTranslateX((prev) => {
-        const newValue = prev - stepSize;
-        return newValue <= -(images.length * 120) ? 0 : newValue;
-      });
-    }, interval);
+      setTranslateX((prev) => (prev - animationStep) % (images.length * 120));
+    }, animationDuration);
 
     return () => clearInterval(timer);
   }, [images]);
@@ -50,9 +42,8 @@ const FilmStrip = ({ images }) => {
           <div
             style={{
               transform: `translateY(${translateY}px)`,
-              transition: "transform 0.1s linear",
             }}
-            className="flex flex-col"
+            className="flex flex-col transition-transform duration-100 linear"
           >
             {[...images, ...images, ...images].map((src, index) => (
               <div
@@ -63,6 +54,7 @@ const FilmStrip = ({ images }) => {
                   src={src}
                   alt={`Movie poster ${index + 1}`}
                   className="w-28 h-40 object-cover"
+                  loading="lazy"
                 />
               </div>
             ))}
@@ -86,9 +78,8 @@ const FilmStrip = ({ images }) => {
           <div
             style={{
               transform: `translateX(${translateX}px)`,
-              transition: "transform 0.1s linear",
             }}
-            className="flex flex-row flex-nowrap"
+            className="flex flex-row flex-nowrap transition-transform duration-100 linear"
           >
             {[...images, ...images, ...images].map((src, index) => (
               <div
@@ -99,6 +90,7 @@ const FilmStrip = ({ images }) => {
                   src={src}
                   alt={`Movie poster ${index + 1}`}
                   className="w-24 h-36 object-cover"
+                  loading="lazy"
                 />
               </div>
             ))}
