@@ -1,9 +1,8 @@
 import React from "react";
-import Document, { Html, Head, Main, NextScript } from "next/document";
-import { CssBaseline } from "@nextui-org/react";
+import Document, { Html, Head, Main, NextScript, DocumentContext } from "next/document";
 
 class MyDocument extends Document {
-  static async getInitialProps(ctx) {
+  static async getInitialProps(ctx: DocumentContext) {  // Add type for 'ctx'
     const initialProps = await Document.getInitialProps(ctx);
     return {
       ...initialProps,
@@ -14,7 +13,9 @@ class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head>{CssBaseline.flush()}</Head>
+        <Head>
+          <style id="jss-server-side">{`/* Add any custom styles here */`}</style>
+        </Head>
         <body>
           <Main />
           <NextScript />
