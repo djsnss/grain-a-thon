@@ -5,8 +5,19 @@ import Image from "next/image";
 import NSSLogo from "../DJSNSSLogo.png"; // Example image
 import axios from "axios";
 import '../page.css'
+type ProgressData = {
+  id: string;
+  label: string;
+  value: number;
+  color: string;
+  img: string;
+};
 
-const ProgressCarousel = ({ progressData }) => {
+type ProgressCarouselProps = {
+  progressData: ProgressData[];
+};
+
+const ProgressCarousel: React.FC<ProgressCarouselProps> = ({ progressData }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -27,13 +38,19 @@ const ProgressCarousel = ({ progressData }) => {
             transition={{ duration: 0.6 }}
             className="relative w-full h-[200px] md:h-[300px] lg:h-[400px] rounded-xl overflow-hidden"
           >
-            <div className="relative w-full h-[350px] mt-14 p-3 rounded-[14px] z-[1111] overflow-hidden flex flex-col items-center justify-center">
-              <div className="blob" style={{backgroundColor: progressData[currentIndex].color}}></div>
+            <div
+              className="relative w-full h-[350px] mt-14 p-3 rounded-[14px] z-[1111] overflow-hidden flex flex-col items-center justify-center"
+              style={{ backgroundColor: progressData[currentIndex].color }}
+            >
               <div className="w-full h-full p-2 z-[2] bg-black backdrop-blur-[24px] rounded-[10px] overflow-hidden flex flex-col justify-end items-start">
-                <img src={progressData[currentIndex].img} alt={progressData[currentIndex].label} className="absolute h-full w-full top-0 left-0 opacity-80"/>
-                  <div className="text-white text-3xl md:text-5xl font-extrabold tracking-wider mb-2 drop-shadow-lg">
-                    {progressData[currentIndex].label}
-                  </div>
+                <img
+                  src={progressData[currentIndex].img}
+                  alt={progressData[currentIndex].label}
+                  className="absolute h-full w-full top-0 left-0 opacity-80"
+                />
+                <div className="text-white text-3xl md:text-5xl font-extrabold tracking-wider mb-2 drop-shadow-lg">
+                  {progressData[currentIndex].label}
+                </div>
                 <p className="text-white text-xl md:text-3xl font-semibold mt-2 drop-shadow-md">
                   {progressData[currentIndex].value} Kgs
                 </p>
@@ -46,10 +63,11 @@ const ProgressCarousel = ({ progressData }) => {
   );
 };
 
-export default function Home() {
-  const [progressData, setProgressData] = useState([]);
 
-  const progressDataTest = [
+export default function Home() {
+  const [progressData, setProgressData] = useState<ProgressData[]>([]);
+
+  const progressDataTest: ProgressData[] = [
     { id: "1", label: "DJSNSS", value: 100, color: "#f94144", img:'/images/th 9.jpg' },
     { id: "2", label: "Trinity", value: 80, color: "#f3722c" , img:'/images/th 9.jpg'},
     { id: "3", label: "NOVA", value: 60, color: "#f8961e" , img:'/images/th 9.jpg'},
@@ -78,12 +96,10 @@ export default function Home() {
 
   async function fetchProgress() {
     try {
-      const res = await axios.get(
-        "http://localhost:8000/committees"
-      );
-      setProgressData(() => res.data);
+      const res = await axios.get("http://localhost:8000/committees");
+      setProgressData(res.data);
     } catch (error) {
-      setProgressData(progressDataTest)
+      setProgressData(progressDataTest);
       console.error("Error fetching leaderboard:", error);
     }
   }
