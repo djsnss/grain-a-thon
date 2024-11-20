@@ -44,7 +44,11 @@ const BarGraph: React.FC<BarGraphProps> = ({ data }) => {
       x: {
         beginAtZero: true,
         ticks: {
-          callback: (value: number) => `${value}%`,
+          callback: (tickValue: string | number) => {
+            // Ensure tickValue is treated as a number
+            const numericValue = typeof tickValue === "number" ? tickValue : parseFloat(tickValue);
+            return `${numericValue}%`;
+          },
         },
       },
       y: {
@@ -63,7 +67,7 @@ const BarGraph: React.FC<BarGraphProps> = ({ data }) => {
       tooltip: {
         callbacks: {
           label: (tooltipItem: TooltipItem<"bar">) => {
-            const rawValue = tooltipItem.raw as number; // Ensure `raw` is treated as a number
+            const rawValue = tooltipItem.raw as number;
             return `${rawValue}%`;
           },
         },
